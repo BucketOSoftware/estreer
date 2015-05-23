@@ -13,7 +13,6 @@ module Estreet
     # TODO: getters and setters
     def initialize(key, value)
       @key = Identifier.new(key)
-      puts "Val #{value.inspect}"
       @value = value.to_expression
     end
 

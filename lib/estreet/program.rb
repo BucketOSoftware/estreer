@@ -1,12 +1,11 @@
 module Estreet
   class Program < Node
-    def initialize(body, loc=nil)
-      super(loc)
+    def initialize(body)
       @body = body
     end
 
     def attributes
-      super.merge(body: Array(@body))
+      super.merge(body: @body)
     end
   end
 end

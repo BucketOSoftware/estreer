@@ -22,6 +22,8 @@ class Estreet::BlockStatement < Estreet::Statement
         stmt.to_statement
       end
     end)
+  rescue NoMethodError => e
+    raise TypeError, "Can't convert to statement: #{statements.inspect}"
   end
   
   attr_reader :statements

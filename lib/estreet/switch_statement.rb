@@ -1,7 +1,7 @@
 module Estreet
   class SwitchStatement < Statement
-    # kases is a series of 2-element arrays, or 1 for the default case
-    def initialize(discriminant, *kases)
+    # kases is an array of 2-element arrays, or 1 for the default case
+    def initialize(discriminant, kases)
       @kases = kases.map do |kase|
         raise TypeError, "Invalid case: #{kase}" unless kase.is_a? Array
 
@@ -18,7 +18,7 @@ module Estreet
     def attributes
       super.merge(
         discriminant: @discriminant,
-        cases: nil, # TODO: [ SwitchCase ];
+        cases: @kases,
         lexical: false, # TODO: an ES6 thing?
       )
     end

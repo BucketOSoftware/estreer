@@ -13,10 +13,12 @@ module Estreet
       case thing
       when Expression
         thing
+      when Array
+        ArrayExpression.new(thing.map {|element| element })
       when Symbol, String
         Identifier.new(thing)
       else
-        raise TypeError
+        raise TypeError, "Can't convert to expression: #{thing.inspect}"
       end
     end
   end

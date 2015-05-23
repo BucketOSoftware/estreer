@@ -1,3 +1,5 @@
+require 'json'
+
 class Estreet::Node
   attr_reader :source_location
 
@@ -21,7 +23,16 @@ class Estreet::Node
   end
 
   def as_json
-    attributes
+    attributes.map {|k,v|
+      case v
+      when Estreet::Node
+        [k, v.as_json]
+      when Array
+        [k, v.map(&:as_json)]
+      else
+        [k, v]
+      end
+    }.to_h
     # raise NotImplementedError
   end
 end
