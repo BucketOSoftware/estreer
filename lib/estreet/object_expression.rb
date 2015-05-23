@@ -2,6 +2,7 @@ module Estreet
   class ObjectExpression < Expression
     def initialize(properties)
       raise TypeError unless properties.all? {|p| p.is_a? Property }
+      @props = properties
     end
 
     def attributes

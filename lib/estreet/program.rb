@@ -1,7 +1,7 @@
 module Estreet
   class Program < Node
     def initialize(body)
-      @body = body
+      @body = Array(body).map {|s| s.to_statement }
     end
 
     def attributes
