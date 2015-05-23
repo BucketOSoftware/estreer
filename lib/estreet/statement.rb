@@ -4,6 +4,7 @@ class Estreet::Statement < Estreet::Node
   end
 end
 
+require 'estreet/loops'
 require 'estreet/block_statement'
 require 'estreet/break_statement'
 require 'estreet/empty_statement'

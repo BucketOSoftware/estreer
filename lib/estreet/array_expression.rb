@@ -1,10 +1,8 @@
 module Estreet
   class ArrayExpression < Expression
-    def initialize(*elements, loc=nil)
-      super(loc)
-
+    def initialize(elements)
       @elements = elements.map do |e|
-        e.nil? ? e : e.to_expression
+        e.nil? ? e : Expression.coerce(e)
       end
     end
 

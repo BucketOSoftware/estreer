@@ -16,4 +16,15 @@ module Estreet
       )
     end
   end
+
+  class LogicalExpression < BinaryExpression
+    def initialize(operator, left, right)
+      Estreet.assert_valid_operator(LOGICAL_OPERATORS, operator)
+
+      @operator = operator
+      @left     = left.to_expression
+      @right    = right.to_expression
+    end
+  end
+  
 end

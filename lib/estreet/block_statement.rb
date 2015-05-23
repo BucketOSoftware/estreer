@@ -10,6 +10,10 @@ class Estreet::BlockStatement < Estreet::Statement
     super.merge(body: @statements)
   end
 
+  def to_block
+    self
+  end
+  
   def self.flatten(statements)
     new(statements.flat_map do |stmt|
       if stmt.is_a? self

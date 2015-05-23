@@ -25,8 +25,12 @@ module Estreet
     include Function
   end
 
-  class FunctionDeclaration < Declaration
+  class FunctionDeclaration < Statement
     include Function
+
+    def to_declaration
+      self
+    end
   end
 end
 

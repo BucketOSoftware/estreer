@@ -1,10 +1,9 @@
 module Estreet
   class LabeledStatement < Statement
-    def initialize(label, body, loc=nil)
-      super(loc)
+    def initialize(label, body)
 
-      @body = body.to_statement
       @label = Identifier.new(label)
+      @body = body.to_statement
     end
 
     def attributes
