@@ -9,7 +9,7 @@ module Estreet
     instanceof
   }.freeze
 
-  def assert_valid_operator(acceptable, actual)
+  def self.assert_valid_operator(acceptable, actual)
     unless acceptable.include?(actual)
       raise ArgumentError, "Invalid operator: #{operator} (valid operators: #{acceptable.join(' ')})"
     end

@@ -10,7 +10,7 @@ module Estreet
       when String, TrueClass, FalseClass, NilClass
         Literal.new(value)
       when Fixnum, Bignum, Float
-        if value < 0 # negative numbers have to be specially handled
+        if value < 0 # negative numbers have to be specially handled -- a negative literal is apparently not allowed?
           UnaryExpression.new("-", Literal.new(value.abs))
         else
           Literal.new(value)

@@ -14,4 +14,7 @@ module Estreet
 end
 
 require 'estreet/identifier'
+require 'estreet/literal'
 require 'estreet/call_expression'
+require 'estreet/binary_expression'
+require 'estreet/unary_expression'

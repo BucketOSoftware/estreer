@@ -10,7 +10,7 @@ module Estreet
     def attributes
       super.merge(
         operator: @operator,
-        argument: @argument;
+        argument: @argument,
         prefix: true # TODO: when is it false?
       )
     end
