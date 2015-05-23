@@ -14,6 +14,7 @@ module Estreet
 
   class ForStatement < Statement
     def initialize(init, test, update, body)
+      # TODO: respond_to to_declaration, maybe?
       raise TypeError unless init.is_a?(VariableDeclaration) ||
         init.is_a?(Expression) ||
         init.nil?

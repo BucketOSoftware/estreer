@@ -1,4 +1,4 @@
 module Estreet
-  class EmptyStatement < Node
+  class EmptyStatement < Statement
   end
 end

@@ -10,12 +10,12 @@ class Estreet::BlockStatement < Estreet::Statement
     super.merge(body: @statements)
   end
 
-  def flatten(statements)
-    BlockStatement.new(statements.flat_map do |stmt|
-      if stmt.is_a? BlockStatement
+  def self.flatten(statements)
+    new(statements.flat_map do |stmt|
+      if stmt.is_a? self
         stmt.statements
       else
-        stmt
+        stmt.to_statement
       end
     end)
   end

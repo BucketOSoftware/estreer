@@ -8,6 +8,7 @@ module Estreet
     + - * / % | ^ & in
     instanceof
   }.freeze
+  ASSIGNMENT_OPERATORS = %w{ = += -= *= /= %= <<= >>= >>>= |= ^= &= }.freeze
 
   def self.assert_valid_operator(acceptable, actual)
     unless acceptable.include?(actual)

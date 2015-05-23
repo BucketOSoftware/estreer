@@ -9,7 +9,9 @@ module Estreet
       @left = if left.respond_to? :to_pattern
         left.to_pattern
       else
-        left.to_expression
+        # left.to_expression
+        # TODO: Test this!
+        Expression.coerce(left)
       end
     end
 

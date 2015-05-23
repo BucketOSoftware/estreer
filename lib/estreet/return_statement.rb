@@ -1,7 +1,6 @@
 module Estreet
   class ReturnStatement < Statement
-    def initialize(argument=nil, loc=nil)
-      super(loc)
+    def initialize(argument=nil)
       @argument = argument.to_expression if argument
     end
 

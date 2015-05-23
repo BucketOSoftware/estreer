@@ -8,7 +8,7 @@ module Estreet
       @property = if @computed
         property.to_expression
       else
-        property.to_identifier
+        Identifier.new(property)
       end
     end
 

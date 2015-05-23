@@ -1,6 +1,7 @@
 module Estreet
   class Identifier < Expression
     def initialize(name)
+      # TODO: raise if it's not a valid JS identifier
       @name = name.to_s
     end
 
@@ -11,6 +12,10 @@ module Estreet
     def to_pattern
       self
     end
-    
+
+    def to_s
+      @name.to_s # this allows us to do Identifier.new(Identifier.new('hello')) and get an identifier
+    end
+
   end
 end

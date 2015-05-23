@@ -8,6 +8,8 @@ module Estreet
     def attributes
       super.merge(label: @label)
     end
-
   end
+
+  class ContinueStatement < BreakStatement; end
+
 end
