@@ -1,6 +1,6 @@
 module Estreet
   class SwitchStatement < Statement
-    # kases is a series of 2-element arrays, or 1 for the default
+    # kases is a series of 2-element arrays, or 1 for the default case
     def initialize(discriminant, *kases)
       @kases = kases.map do |kase|
         raise TypeError, "Invalid case: #{kase}" unless kase.is_a? Array

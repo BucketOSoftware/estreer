@@ -2,11 +2,19 @@ module Estreet
   class Literal < Expression
     def initialize(value)
       # TODO: Regexp? I guess?
-      @value = case value
-      when String then value
-      when TrueClass, FalseClass then value
-      when NilClass then value
-      when Fixnum, Bignum, Float then value
+      @value = value
+    end
+
+    def self.from_ruby(value)
+      case value
+      when String, TrueClass, FalseClass, NilClass
+        Literal.new(value)
+      when Fixnum, Bignum, Float
+        if value < 0 # negative numbers have to be specially handled
+          UnaryExpression.new("-", Literal.new(value.abs))
+        else
+          Literal.new(value)
+        end
       else
         raise ArgumentError, "Can't convert to a literal: #{value}"
       end

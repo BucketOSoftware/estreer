@@ -1,6 +1,6 @@
 module Estreet
   class AssignmentExpression < Expression
-    def initialize(operator, left, right)
+    def initialize(left, right, operator="=")
       # TODO: InvalidOperatorError
       Estreet.assert_valid_operator(ASSIGNMENT_OPERATORS, operator)
 
