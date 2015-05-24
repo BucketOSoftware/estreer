@@ -25,5 +25,5 @@ transpiler, if you're so inclined.
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.2"
-  spec.add_development_dependency "pry-byebug"
+  spec.add_development_dependency "pry-byebug", "~> 3.1"
 end
