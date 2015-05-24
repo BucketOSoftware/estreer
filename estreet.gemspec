@@ -9,7 +9,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alex Michaud"]
   spec.email         = ["alex@bucketosoftware.com"]
   spec.summary       = %q{Create simple estree-type ASTs from Ruby}
-  # spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = <<-DESC
+Create simple estree-type abstract syntax trees (ASTs) from Ruby.
+You could use it in the code generation part of a Ruby-based
+transpiler, if you're so inclined.
+  DESC
   spec.homepage      = "https://github.com/BucketOSoftware/estreet"
   spec.license       = "MIT"
 
