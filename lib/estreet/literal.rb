@@ -5,8 +5,12 @@ module Estreet
       @value = value
     end
 
+    # Convert a ruby literal into a node that represents the same value
     def self.from_ruby(value)
       case value
+      when Array
+        # values are expected to be JS nodes already
+        ArrayExpression.new(value)
       when String, TrueClass, FalseClass, NilClass
         Literal.new(value)
       when Fixnum, Bignum, Float
@@ -18,6 +22,10 @@ module Estreet
       else
         raise ArgumentError, "Can't convert to a literal: #{value}"
       end
+    end
+
+    def self.[](value)
+      from_ruby(value)
     end
 
     def attributes

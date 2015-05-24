@@ -7,5 +7,10 @@ module Estreet
     def attributes
       super.merge(argument: @argument)
     end
+
+    def self.error(expression)
+      new(NewExpression.new(Identifier['Error'], [expression.to_expression]))
+    end
+
   end
 end

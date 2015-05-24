@@ -1,6 +1,14 @@
-class Estreet::Statement < Estreet::Node
-  def to_statement
-    self
+module Estreet
+  class Statement < Node
+    def to_statement
+      self
+    end
+
+    # Returns a block where the receiver is the first statment and `statement` is the second
+    def <<(statement)
+      BlockStatement.flatten(self, statement)
+    end
+
   end
 end
 
