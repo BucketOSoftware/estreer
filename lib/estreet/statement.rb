@@ -4,7 +4,7 @@ module Estreet
       self
     end
 
-    # Returns a block the receiver is the first statment and `statement` is the second
+    # Returns a block where the receiver is the first statment and `statement` is the second
     def <<(statement)
       BlockStatement.flatten(self, statement)
     end
