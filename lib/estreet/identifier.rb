@@ -17,5 +17,10 @@ module Estreet
       @name.to_s # this allows us to do Identifier.new(Identifier.new('hello')) and get an identifier
     end
 
+    def self.[](name)
+      return name if name.is_a?(self)
+      new(name)
+    end
+    
   end
 end
