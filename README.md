@@ -79,12 +79,11 @@ console.log(1, 2, 3, 'and to the', 4);
 Generally you won't be building these ASTs by hand, but all the same there are a few shortcuts to make things a bit more Rubular. This code produces the same AST as above:
 
 ```ruby
-log_things = [1, 2, 3, "and to the", 4]
+to_log = [1, 2, 3, "and to the", 4]
 
 Program.new(
-  Identifier['console']
-    .property('log')
-    .call(*log_things.map {|l| Literal[l] })
+  Identifier['console'].property('log')
+    .call(*to_log.map {|l| Literal[l] })
 ).as_json
 ```
 
