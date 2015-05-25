@@ -1,5 +1,7 @@
 # Estreet
 
+[![Gem Version](https://badge.fury.io/rb/estreet.svg)](http://badge.fury.io/rb/estreet)
+
 Create simple estree-type abstract syntax trees (ASTs) from Ruby. You could use it in the code generation part of a Ruby-based transpiler, if you're so inclined. See [the estree specs](https://github.com/estree/estree/blob/master/spec.md) for information on the different node types.
 
 ## Limitations
@@ -29,55 +31,62 @@ Or install it yourself as:
 
 ## Usage
 
-    include Estreet
-    to_log = [1, 2, 3, "and to the", 4]
+```ruby
+include Estreet
+to_log = [1, 2, 3, "and to the", 4]
 
-    # Retrieve the "log" property of the "console" object
-    console_log = MemberExpression.new(Identifier['console'], Identifier['log'], false)
-    
-    # Call console.log with a series of literals
-    log_message = CallExpression.new(console_log, to_log.map do |l|
-      Literal.from_ruby(l)
-    end)
-    
-    # Wrap it in a program and get the JSON version
-    Program.new(log_message).as_json
+# Retrieve the "log" property of the "console" object
+console_log = MemberExpression.new(Identifier['console'], Identifier['log'], false)
+
+# Call console.log with a series of literals
+log_message = CallExpression.new(console_log, to_log.map do |l|
+  Literal.from_ruby(l)
+end)
+
+# Wrap it in a program and get the JSON version
+Program.new(log_message).as_json
+```
 
 This will produce the following nested Ruby hash, which can be translated directly to JSON:
 
-    {:type=>"Program",
-     :body=>
-      [{:type=>"ExpressionStatement",
-        :expression=>
-         {:type=>"CallExpression",
-          :callee=>
-           {:type=>"MemberExpression",
-            :object=>{:type=>"Identifier", :name=>"console"},
-            :property=>{:type=>"Identifier", :name=>"log"},
-            :computed=>false},
-          :arguments=>
-           [{:type=>"Literal", :value=>1},
-            {:type=>"Literal", :value=>2},
-            {:type=>"Literal", :value=>3},
-            {:type=>"Literal", :value=>"and to the"},
-        {:type=>"Literal", :value=>4}]}}]}
+```json
+{:type=>"Program",
+ :body=>
+  [{:type=>"ExpressionStatement",
+    :expression=>
+     {:type=>"CallExpression",
+      :callee=>
+       {:type=>"MemberExpression",
+        :object=>{:type=>"Identifier", :name=>"console"},
+        :property=>{:type=>"Identifier", :name=>"log"},
+        :computed=>false},
+      :arguments=>
+       [{:type=>"Literal", :value=>1},
+        {:type=>"Literal", :value=>2},
+        {:type=>"Literal", :value=>3},
+        {:type=>"Literal", :value=>"and to the"},
+    {:type=>"Literal", :value=>4}]}}]}
+```
 
 This is equivalent to the following real actual JavaScript:
 
-    console.log(1, 2, 3, 'and to the', 4);
+```javascript
+console.log(1, 2, 3, 'and to the', 4);
+```
 
 ### Shortcuts
 
 Generally you won't be building these ASTs by hand, but all the same there are a few shortcuts to make things a bit more Rubular. This code produces the same AST as above:
 
-    log_things = [1, 2, 3, "and to the", 4]
-    
-    Program.new(
-      Identifier['console']
-        .property('log')
-        .call(*log_things.map {|l| Literal[l] })
-    ).as_json
+```ruby
+log_things = [1, 2, 3, "and to the", 4]
 
+Program.new(
+  Identifier['console']
+    .property('log')
+    .call(*log_things.map {|l| Literal[l] })
+).as_json
+```
 
 ### Okay, I've got my AST. Now what?
 
@@ -85,19 +94,21 @@ Well, you could export it as JSON and then use [escodegen](http://github.com/est
 
 If you want to get fancier still, you could avoid leaving Ruby entirely by using [therubyracer](http://github.com/cowboyd/therubyracer) to run escodegen (packaging up the estools is left as an exercise for the reader -- I used browserify):
 
-    cxt.load("estools.js")
-    
-    escodegen = cxt[:escodegen]
-    cxt[:ast] = ast.as_json
-    
-    begin
-      escodegen[:generate].call(cxt[:ast], generate_opts)
-    rescue V8::Error => e
-      # in case there's a bug in Estreet and the AST wasn't valid
-      $stderr.puts e.message.red
-      $stderr.puts e.backtrace.join("\n").yellow
-      raise e
-    end
+```ruby
+cxt.load("estools.js")
+
+escodegen = cxt[:escodegen]
+cxt[:ast] = ast.as_json
+
+begin
+  escodegen[:generate].call(cxt[:ast], generate_opts)
+rescue V8::Error => e
+  # in case there's a bug in Estreet and the AST wasn't valid
+  $stderr.puts e.message.red
+  $stderr.puts e.backtrace.join("\n").yellow
+  raise e
+end
+```
 
 ## Credits
 
