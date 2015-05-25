@@ -49,7 +49,7 @@ Program.new(log_message).as_json
 
 This will produce the following nested Ruby hash, which can be translated directly to JSON:
 
-```json
+```ruby
 {:type=>"Program",
  :body=>
   [{:type=>"ExpressionStatement",
